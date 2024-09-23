@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Search, ChevronDown } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -14,7 +15,7 @@ const Header = () => {
     return (
         <>
             {/* Main header */}
-            <header className="sticky top-0 z-20 bg-gray-50 shadow-md">
+            <header className="sticky top-0 z-20 bg-gray-50 shadow-md dark:bg-dark">
                 <div className="p-4 flex justify-between items-center">
                     <h1 className="text-xl font-bold text-purple-600">LearnXperience</h1>
 
@@ -79,7 +80,8 @@ const Header = () => {
                                 </button>
                             </div>
                         )}
-                    </nav>
+                        <ThemeToggle />
+                    </nav> 
                 </div>
                 <hr className="border-t border-gray-200" />
             </header>
