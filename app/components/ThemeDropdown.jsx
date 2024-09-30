@@ -9,16 +9,15 @@ const themes = [
 ];
 
 export default function ThemeDropdown() {
-  const [theme, setTheme] = useState('light'); // Default theme
+  const [theme, setTheme] = useState(() => localStorage.getItem('selectedTheme') || 'light');
 
-  // Load saved theme from localStorage on mount
+  // Apply theme when component mounts
   useEffect(() => {
     const savedTheme = localStorage.getItem('selectedTheme') || 'light';
     setTheme(savedTheme);
     document.body.className = themes.find(t => t.name === savedTheme).cssClass;
   }, []);
-
-  // Update theme in localStorage and apply CSS class
+  
   const handleThemeChange = (selectedTheme) => {
     setTheme(selectedTheme);
     localStorage.setItem('selectedTheme', selectedTheme);
