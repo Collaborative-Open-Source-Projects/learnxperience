@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-50 theme-dark:bg-slate-800 border-t-2 w-full py-5 px-10 grid grid-cols-1 md:grid-cols-4 gap-6">
+        <footer className="bg-gray-50 theme-dark:bg-slate-800 border-t-2 w-full py-5 px-10 h-full grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* Quick Links Section */}
             <div className='flex flex-col gap-2'>
                 <h1 className='text-lg font-bold'>Quick Links</h1>
