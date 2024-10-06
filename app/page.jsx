@@ -1,7 +1,9 @@
+'use client';
 import Hero from './components/Hero';
 import { Gamepad2, GraduationCap, Users, Book, Code, ChartBar } from "lucide-react"
+import { useState } from 'react';
 
-const page = () => {
+const Page = () => {
   const courses = [
     {
       title: "Introduction to Web Development",
@@ -25,6 +27,37 @@ const page = () => {
       level: "All levels"
     },
   ]
+
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 201) {
+        setMessage('Successfully signed up!');
+        setEmail('');
+      } else if (response.status === 409) {
+        setMessage( 'Email already exists!');
+      } else {
+        setMessage(data.message || 'Something went wrong');
+      }
+    } catch (error) {
+      setMessage('Error signing up, please try again later.');
+    }
+  };
+
   return (
     <main className='relative flex flex-col min-h-screen justify-center'>
       {/* <SideBar /> */}
@@ -82,11 +115,12 @@ const page = () => {
               </p>
             </div>
             <div className="w-full max-w-sm space-y-2">
-              <form className='flex flex-col'>
+              <form onSubmit={handleSubmit} className='flex flex-col'>
                 <label htmlFor="newsletter" className="mb-2 font-medium">Stay updated with new courses</label>
                 <input
                   type="email"
                   id="newsletter"
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   className="p-2 border border-gray-300 rounded-md mb-2 focus:outline-none focus:ring-1 focus:ring-purple-300"
                   required
@@ -98,6 +132,7 @@ const page = () => {
                   Subscribe
                 </button>
               </form>
+              {message && <p>{message}</p>}
               <p className="text-xs text-white/60">
                 By signing up, you agree to our Terms & Conditions and Privacy Policy.
               </p>
@@ -110,4 +145,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

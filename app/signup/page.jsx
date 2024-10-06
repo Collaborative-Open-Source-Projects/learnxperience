@@ -20,7 +20,7 @@ function Signup() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, email, password }),
         });
-      
+
         const data = await res.json();
         if (res.ok) {
           setMessage('Signup successful! Please log in.');
