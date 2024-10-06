@@ -3,10 +3,62 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+@layer utilities {
+  .padding-x {
+    @apply px-5 sm:px-6 md:px-8 lg:px-10 xl:px-16 2xl:px-52 ;
+  }
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+}
+
+.inter {
+  font-family: Inter;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter_18pt-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter_18pt-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter_18pt-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter_28pt-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter_24pt-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
 }
 
 .theme-light {
@@ -34,8 +86,13 @@ body {
   color: var(--text-color);
 }
 
-.theme-light-box { background-color: #ffffff; border: 1px solid #ccc; }
-.theme-dark-box { background-color: #000000; }
+.theme-light-box {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+.theme-dark-box {
+  background-color: #000000;
+}
 /* .theme-ocean-box { background-color: #2e8b57; }
 .theme-desert-box { background-color: #edc9af; } */
 
