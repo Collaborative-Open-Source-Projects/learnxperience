@@ -9,24 +9,29 @@ const themes = [
 ];
 
 export default function ThemeDropdown() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('selectedTheme') || 'light');
+  const [theme, setTheme] = useState('light'); // Default to 'light'
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Apply theme when component mounts
   useEffect(() => {
-    const savedTheme = localStorage.getItem('selectedTheme') || 'light';
-    setTheme(savedTheme);
-    document.body.className = themes.find(t => t.name === savedTheme).cssClass;
+    // Access localStorage only when the component is mounted (client-side)
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('selectedTheme') || 'light';
+      setTheme(savedTheme);
+      document.body.className = themes.find(t => t.name === savedTheme)?.cssClass || 'theme-light';
+    }
   }, []);
-  
+
   const handleThemeChange = (selectedTheme) => {
     setTheme(selectedTheme);
-    localStorage.setItem('selectedTheme', selectedTheme);
-    const themeCssClass = themes.find(t => t.name === selectedTheme).cssClass;
-    document.body.className = themeCssClass;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('selectedTheme', selectedTheme);
+      const themeCssClass = themes.find(t => t.name === selectedTheme)?.cssClass;
+      document.body.className = themeCssClass || 'theme-light';
+    }
   };
 
   const currentTheme = themes.find(t => t.name === theme);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
@@ -38,7 +43,7 @@ export default function ThemeDropdown() {
       {/* Button showing active theme color */}
       <button
         className="w-10 h-10 rounded-full border border-gray-300 focus:outline-none"
-        style={{ backgroundColor: currentTheme.bgColor }}
+        style={{ backgroundColor: currentTheme?.bgColor }}
         aria-label="Current theme color"
         onClick={toggleDropdown} // Toggle dropdown on click
       ></button>
@@ -56,7 +61,6 @@ export default function ThemeDropdown() {
               className="flex items-center justify-center cursor-pointer  py-2 hover:bg-gray-100"
             >
               <span className={`theme-color-box ${t.colorBoxClass} mr-2`}></span>
-             
             </div>
           ))}
         </div>
