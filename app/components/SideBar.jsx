@@ -7,18 +7,18 @@ const SideBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <div className="flex h-screen">
+    <div className="fixed">
       <aside
         className={`
           flex flex-col
-          transition-all duration-300 ease-in-out
+          transition-all duration-300 ease-in-out min-h-screen
           ${isExpanded ? 'w-64' : 'w-20'}
-          bg-gray-900 text-white h-full absolute left-0 top-0
+          bg-gray-900 text-white
         `}
         onMouseEnter={() => setIsExpanded(true)}
         onMouseLeave={() => setIsExpanded(false)}
       >
-        <nav className="flex-grow">
+        <nav className="mt-10">
           {menuItems.map((item, index) => (
             <Link
               href={item.route}

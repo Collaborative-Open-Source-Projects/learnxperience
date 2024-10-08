@@ -1,7 +1,7 @@
 import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
+import Chatbot from './components/Chatbot'
 export const metadata = {
   title: 'LearnXperience',
   description: 'Learn tech in an interactive and immersive way.',
@@ -44,6 +44,7 @@ export default function RootLayout({ children }) {
       <body className={'bg-gray-50 text-gray-900 inter'}>
         <Navbar />
         {children}
+        <Chatbot />
         <Footer />
       </body>
     </html>
