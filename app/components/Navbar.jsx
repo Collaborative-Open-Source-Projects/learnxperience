@@ -30,7 +30,6 @@ const Header = () => {
   const [user, setUser] = useState(null); // Store user data
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-  // Handle sticky header on scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 30);
@@ -63,6 +62,10 @@ const Header = () => {
     setIsPopoverOpen((prev) => !prev);
   };
 
+  const handleLogOut = () => {
+    setIsLoggedIn(!isLoggedIn);
+  }
+
   const ProfileButton = () => (
     <button
       className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center cursor-pointer"
@@ -84,10 +87,11 @@ const Header = () => {
       </div>
       <hr className="border-gray-200" />
       <div className="p-2">
-        {['Profile', 'Settings', 'Support', 'Sign out'].map((item) => (
+        {['Profile', 'Settings', 'Support', isLoggedIn ? 'Logout' : 'Login/Register'].map((item) => (
           <button
             key={item}
             className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-purple-100"
+            onClick={item === 'Logout' ? handleLogOut : undefined}
           >
             {item}
           </button>
